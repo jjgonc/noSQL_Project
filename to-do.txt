@@ -1,0 +1,27 @@
+Objetivo: Criar um Software capaz de detetar modificações não-autorizadas em ficheiros críticos de um sistema virtual de
+ficheiros baseado em libfuse.
+
+
+
+Step by step:
+
+1. Definir a estrutura do sistema de ficheiros virtual que será utilizado para interagir com as operações de acesso a objetos do sistema de ficheiros.
+ Para isso, pode-se espelhar uma parte do sistema de ficheiros existente, como sugerido no enunciado.
+ Dependendo do nível de abstração escolhido, pode ser suficiente interceptar as chamadas ao sistema open(), read() e write().
+
+--------------------------------------------------------------------------------------
+
+
+
+2. Em seguida, é necessário implementar a intercepção dessas chamadas do sistema e a verificação das regras definidas.
+   Essa verificação pode ser feita lendo as permissões dos ficheiros que contêm as regras e os contactos dos utilizadores envolvidos.
+   As regras podem ter em conta padrões do nome e caminho do objeto, datas de criação, modificação e acesso, identificação do usuário e grupo dono, entre outros critérios.
+
+3. Quando uma operação de acesso é negada ou requer autorização explícita, a execução da operação é suspensa e é enviado um código OTP para o usuário responsável pela autorização.
+   Esse código pode ser enviado por e-mail, SMS ou por meio de um aplicativo como o Google Authenticator.
+
+4. É necessário implementar também um mecanismo para gerir os contactos dos utilizadores envolvidos e permitir a configuração do tempo máximo para a conclusão do processo de autorização.
+
+5. Para integrar a componente com a infraestrutura de logs rsyslog, pode-se utilizar a API de logs do rsyslog e enviar as mensagens de log para o servidor de logs correspondente.
+
+6. Por fim, é importante realizar testes rigorosos da aplicação, tanto para verificar o funcionamento correto das regras e autorizações quanto para garantir a integração com a infraestrutura de logs.
